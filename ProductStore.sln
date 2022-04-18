@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PS.Domain", "PS.Domain\PS.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PS.Service", "PS.Service\PS.Service.csproj", "{E7BFF840-27C7-47F8-BB27-304860EB7302}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS.Data", "PS.Data\PS.Data.csproj", "{AC102F57-D943-45C7-B3A3-57269BB67125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PS.Data", "PS.Data\PS.Data.csproj", "{AC102F57-D943-45C7-B3A3-57269BB67125}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PS.Web", "PS.Web\PS.Web.csproj", "{067CB839-67E6-4854-A6EA-302AAFE2E889}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{AC102F57-D943-45C7-B3A3-57269BB67125}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC102F57-D943-45C7-B3A3-57269BB67125}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC102F57-D943-45C7-B3A3-57269BB67125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{067CB839-67E6-4854-A6EA-302AAFE2E889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{067CB839-67E6-4854-A6EA-302AAFE2E889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{067CB839-67E6-4854-A6EA-302AAFE2E889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{067CB839-67E6-4854-A6EA-302AAFE2E889}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

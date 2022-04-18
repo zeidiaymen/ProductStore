@@ -68,18 +68,7 @@ namespace PS.Console
             p3.MyCategory.GetDetails();*/
 
             #endregion
-            Product chem = new Chemical() { Name = "Aymen", DateProd = DateTime.Now, Image = "zeidi" };
-            var serviceProvider = new ServiceCollection()
-            .AddScoped<IProduct, ProductService>()
-            .AddTransient<IUnitOfWork, UnitOfWork>()
-            .AddSingleton<IDataBaseFactory, DataBaseFactory>()
-            .BuildServiceProvider();
-            var prodServ = serviceProvider.GetService<IProduct>();
             
-            prodServ.Add(chem);
-            prodServ.Commit();
-
-           System.Console.WriteLine (prodServ.GetById(1).Name);
 
         }
 

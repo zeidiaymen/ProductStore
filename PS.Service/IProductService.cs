@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PS.Service
 {
-public     interface IProduct:IService<Product>
+public     interface IProductService:IService<Product>
     {
         IList<Product> FindMost5ExpensiveProds();
         float UnavailableProdPercentage();

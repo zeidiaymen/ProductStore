@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace PS.Service
 {
-    public class ProductService : Service<Product>,IProduct
+    public class ProductService : Service<Product>,IProductService
     {
         IDataBaseFactory dbf;
         
@@ -20,7 +20,7 @@ namespace PS.Service
 
         public void DeleteOldProducts()
         {
-            Delete(p => p.DateProd.Year < new DateTime().Year);     
+            Delete(p => p.DateProd.AddYears(1) < DateTime.Now);     
         }
 
         public IList<Product> FindMost5ExpensiveProds()
