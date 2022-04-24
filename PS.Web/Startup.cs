@@ -29,7 +29,7 @@ namespace PS.Web
             services.AddControllersWithViews();
             services.AddScoped<IProductService, ProductService>()
                 .AddScoped<ICategoryService, CategoryService>()
-                .AddScoped<IUnitOfWork, IUnitOfWork>()
+                .AddScoped<IUnitOfWork, UnitOfWork>()
                 .AddSingleton<IDataBaseFactory, DataBaseFactory>()
                // .AddDbContext();
                 ;

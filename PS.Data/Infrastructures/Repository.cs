@@ -15,9 +15,7 @@ namespace PS.Data.Infrastructures
         public Repository(IDataBaseFactory dbf )
         {
             this.dbf = dbf;
-
-            dbset = dbf.DataContext.Set<T>();
-        
+            dbset = dbf.DataContext.Set<T>();       
         }
         public void Add(T obj)
         {
