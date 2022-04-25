@@ -26,13 +26,12 @@ namespace PS.Service
         public IList<Product> FindMost5ExpensiveProds()
         {
             return GetAll().OrderByDescending(x => x.Price).Take(5).ToList();
-        
-         
         }
 
         public IList<Product> GetProdByClient(Client c)
         {
-            return GetAll().SelectMany(p => p.Invoices).Where(i => i.MyClient.Cin .Equals (c.Cin))
+            return GetAll().SelectMany(p => p.Invoices)
+                .Where(i => i.MyClient.Cin .Equals (c.Cin))
                 .Select(p=>p.MyProduct).Distinct().ToList();
         }
 

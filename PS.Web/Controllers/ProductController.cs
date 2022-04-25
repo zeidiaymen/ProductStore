@@ -21,7 +21,8 @@ namespace PS.Web.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            
+            return View(prodService.GetAll().ToList());
         }
 
         // GET: ProductController/Details/5
