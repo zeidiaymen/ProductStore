@@ -19,10 +19,11 @@ namespace PS.Web.Controllers
             this.prodService = prodService;
             this.catService = catService;
         }
-        public ActionResult Index()
+        public ActionResult Index(String filter)
         {
             
-            return View(prodService.GetAll().ToList());
+            return View(prodService.GetMany(p=>p.Name.StartsWith(filter))
+                .ToList());
         }
 
         // GET: ProductController/Details/5
