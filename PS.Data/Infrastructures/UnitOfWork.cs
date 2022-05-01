@@ -9,7 +9,8 @@ namespace PS.Data.Infrastructures
 
     {
         IDataBaseFactory dbf;
-        public UnitOfWork(IDataBaseFactory dbFactory) { dbf = dbFactory; }
+        public UnitOfWork(IDataBaseFactory dbFactory) 
+        { dbf = dbFactory; }
         public void Commit()
         {
             dbf.DataContext.SaveChanges();

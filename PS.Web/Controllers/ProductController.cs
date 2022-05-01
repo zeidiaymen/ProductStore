@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using PS.Domain;
 using PS.Service;
 using System;
 using System.Collections.Generic;
@@ -35,16 +37,22 @@ namespace PS.Web.Controllers
         // GET: ProductController/Create
         public ActionResult Create()
         {
+            var categories = catService.GetAll();
+            ViewBag.CategoryId = new SelectList(categories, "CategoryId", "Name");
             return View();
+
+            
         }
 
         // POST: ProductController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Product p)
         {
             try
             {
+                prodService.Add(p);
+                prodService.Commit();
                 return RedirectToAction(nameof(Index));
             }
             catch
