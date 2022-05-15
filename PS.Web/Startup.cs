@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ProductStore.Data.Infrastructure;
+using PS.Data.Infrastructure;
 using PS.Data.Infrastructures;
 using PS.Service;
 using System;
@@ -27,12 +27,17 @@ namespace PS.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IProductService, ProductService>()
-                .AddScoped<ICategoryService, CategoryService>()
-                .AddScoped<IUnitOfWork, UnitOfWork>()
-                .AddSingleton<IDataBaseFactory, DataBaseFactory>()
-               // .AddDbContext();
-                ;
+            services.AddScoped<IDataBaseFactory, DataBaseFactory>()
+            .AddScoped<IUnitOfWork, UnitOfWork>()
+            .AddScoped<IProductService, ProductService>()
+            .AddScoped<ICategoryService, CategoryService>();
+
+
+
+          
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

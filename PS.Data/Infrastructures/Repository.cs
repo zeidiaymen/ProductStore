@@ -7,70 +7,67 @@ using System.Text;
 
 namespace PS.Data.Infrastructures
 {
-  public   class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class
     {
-        IDataBaseFactory dbf;
-        DbSet<T> dbset;
+        readonly PSContext context;
 
-        public Repository(IDataBaseFactory dbf )
+        DbSet<T> dbSet;
+        public Repository(IDataBaseFactory dbFactory)
         {
-            this.dbf = dbf;
-            dbset = dbf.DataContext.Set<T>();       
+            context = dbFactory.DataContext;
+            dbSet = context.Set<T>();
         }
         public void Add(T obj)
         {
-            dbset.Add(obj);
-            
+            dbSet.Add(obj);
         }
 
-      //  public void Commit()
-       // {
-         //   dbf.DataContext.SaveChanges();
-        //}
+        public void Commit()
+        {
+            context.SaveChanges();
+        }
 
         public void Delete(T obj)
         {
-            dbset.Remove(obj);
+            dbSet.Remove(obj);
         }
 
         public void Delete(Expression<Func<T, bool>> condition)
         {
-             dbset.RemoveRange(dbset.Where(condition));
+            dbSet.RemoveRange(dbSet.Where(condition));
         }
 
         public T Get(Expression<Func<T, bool>> condition)
         {
-            return dbset.Where(condition).FirstOrDefault();
+            return dbSet.Where(condition).FirstOrDefault();
         }
 
         public IEnumerable<T> GetAll()
         {
-                return  
-                dbset.AsEnumerable();
+            return dbSet;
         }
 
         public T GetById(int id)
         {
-            return dbset.Find(id);
+            return dbSet.Find(id);
         }
 
         public T GetById(string id)
         {
-            return dbset.Find(id);
+            return dbSet.Find(id);
         }
-
-      
 
         public IEnumerable<T> GetMany(Expression<Func<T, bool>> condition = null)
         {
-            if (condition!= null)
-                return dbset.Where(condition).AsEnumerable();
-            return dbset.AsEnumerable();
+            return condition != null ? dbSet.Where(condition) : dbSet;
         }
 
         public void Update(T obj)
         {
-            dbset.Update(obj);
+            //dbSet.Attach(obj);
+            //context.Entry(obj).State = EntityState.Modified;
+            dbSet.Update(obj);
+
         }
     }
 }

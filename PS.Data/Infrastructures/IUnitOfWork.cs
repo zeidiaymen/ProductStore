@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProductStore.Data.Infrastructure
+namespace PS.Data.Infrastructure
 {
     public interface IUnitOfWork : IDisposable
     {

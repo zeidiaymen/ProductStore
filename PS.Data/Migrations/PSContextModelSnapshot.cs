@@ -5,11 +5,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PS.Data;
-using PS.Data.Infrastructures;
 
 namespace PS.Data.Migrations
 {
-    [DbContext(typeof(IDataBaseFactory))]
+    [DbContext(typeof(PSContext))]
     partial class PSContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -79,7 +78,7 @@ namespace PS.Data.Migrations
 
                     b.HasIndex("ProductFK");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("Factures");
                 });
 
             modelBuilder.Entity("PS.Domain.Product", b =>
@@ -98,12 +97,11 @@ namespace PS.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MyPackagingType")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -122,8 +120,6 @@ namespace PS.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Product");
                 });
 
             modelBuilder.Entity("PS.Domain.Provider", b =>
@@ -177,7 +173,7 @@ namespace PS.Data.Migrations
                     b.Property<string>("Herb")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("Biological");
+                    b.ToTable("Biologicals");
                 });
 
             modelBuilder.Entity("PS.Domain.Chemical", b =>
@@ -187,7 +183,7 @@ namespace PS.Data.Migrations
                     b.Property<string>("LabName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("Chemical");
+                    b.ToTable("Chemicals");
                 });
 
             modelBuilder.Entity("PS.Domain.Invoice", b =>
@@ -234,8 +230,23 @@ namespace PS.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PS.Domain.Biological", b =>
+                {
+                    b.HasOne("PS.Domain.Product", null)
+                        .WithOne()
+                        .HasForeignKey("PS.Domain.Biological", "ProductId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("PS.Domain.Chemical", b =>
                 {
+                    b.HasOne("PS.Domain.Product", null)
+                        .WithOne()
+                        .HasForeignKey("PS.Domain.Chemical", "ProductId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
                     b.OwnsOne("PS.Domain.Address", "address", b1 =>
                         {
                             b1.Property<int>("ChemicalProductId")
@@ -255,7 +266,7 @@ namespace PS.Data.Migrations
 
                             b1.HasKey("ChemicalProductId");
 
-                            b1.ToTable("Products");
+                            b1.ToTable("Chemicals");
 
                             b1.WithOwner()
                                 .HasForeignKey("ChemicalProductId");

@@ -6,12 +6,17 @@ namespace PS.Data.Infrastructures
 {
     public class DataBaseFactory : Disposable, IDataBaseFactory
     {
-        public PSContext DataContext => new PSContext();
-
+        readonly PSContext dataContext;
+        public PSContext DataContext => dataContext;
+        public DataBaseFactory()
+        {
+            dataContext = new PSContext();
+        }
 
         public override void DisposeCore()
         {
-            DataContext.Dispose();
+            if (DataContext != null)
+                DataContext.Dispose();
         }
     }
 }

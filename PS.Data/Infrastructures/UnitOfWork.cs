@@ -1,4 +1,5 @@
-﻿using ProductStore.Data.Infrastructure;
+﻿
+using PS.Data.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Text;

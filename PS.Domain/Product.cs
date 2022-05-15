@@ -5,13 +5,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PS.Domain
 {
-    
+    public enum PackagingType
+    {
+        Carton = 0, Plastic = 1
+    };
     public class Product:Concept
     {
         [DataType(DataType.Date)]
         [Display(Name="Production Date")]
         public  DateTime DateProd{ get; set; }
-          public string Image { get; set; }
+      
+        
+        public string Image { get; set; }
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Required(ErrorMessage="this field is required")]
@@ -24,6 +29,9 @@ namespace PS.Domain
         public int ProductId { get; set; }
         [Range(0,int.MaxValue,ErrorMessage ="positif int")]
         public int  Quantity { get; set; }
+
+
+        public PackagingType MyPackagingType { get; set; } = 0;
         public virtual  IList<Provider> Providers { get; set; }
         [ForeignKey("MyCategory")]
         public int ? CategoryId { get; set; }

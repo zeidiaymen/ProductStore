@@ -1,4 +1,4 @@
-﻿using ProductStore.Data.Infrastructure;
+﻿using PS.Data.Infrastructure;
 using PS.Data.Infrastructures;
 using PS.Domain;
 using System;
